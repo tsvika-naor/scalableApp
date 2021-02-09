@@ -1,0 +1,9 @@
+@import "/src/styles/mixins.scss";
+
+.shadow{
+@include shadow;
+padding: 20px;
+}
+.card{
+    @include card
+}
