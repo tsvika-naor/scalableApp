@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:dev": "ng serve --c=dev",
+    "start:dev": "ng serve --c=dev --open",
     "build:dev": "ng serve --c=dev",
     "start:prod": "ng serve --c=prod",
     "build:prod": "ng serve --c=prod"
