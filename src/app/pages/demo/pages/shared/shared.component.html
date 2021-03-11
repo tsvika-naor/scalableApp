@@ -1,31 +1,16 @@
-<app-button>Test Button</app-button>
-<!-- <h2>Actions</h2>
-
-<app-button (click)="onToggleSpinner()">Toggle Spinner</app-button>
-<app-button (click)="onError()">Error</app-button>
-<app-button (click)="onSuccess()">Success</app-button>
-
 <h2>Form</h2>
 
-<div class="wrapper">
 
+<form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
 
-    <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+    <app-button (click)="onPatchValue()">Patch Value</app-button>
+    <app-button (click)="onToggleInline()">Toggle Inline</app-button>
 
-        <app-button type="submit">Submit</app-button>
-        <app-button (click)="onPatchValue()">Patch Value</app-button>
-        <app-button (click)="onToggleInline()">Toggle Inline</app-button>
-        <app-button (click)="onToggleDisable()">Toggle Disable</app-button>
-        <br /><br /><br />
+    <br /><br /><br />
 
-        <app-form-field label="Input" [required]="true" [control]="form.controls.input" [isInline]="isInline"
-            [patternError]="regexErrors.numbers">
-            <app-input formControlName="input"></app-input>
-        </app-form-field>
+    <app-form-field label="input" [required]="true" [control]="form.controls.input" [isInline]="isInline">
+        <app-input formControlName="input"></app-input>
+    </app-form-field>
+</form>
 
-
-    </form>
-</div>
-<code>
-    {{ form.value | json }}
-</code> -->
+<code>{{form.value | json}}</code>
