@@ -8,10 +8,12 @@ import { AbstractControl } from '@angular/forms';
 })
 export class FormFieldComponent implements OnInit {
 
+  // Input() getting data from other component
   @Input() label: string;
   @Input() required: boolean;
   @Input() isInline: boolean;
   @Input() control: AbstractControl;
+  @Input() patternError: string;
 
 
   constructor() {

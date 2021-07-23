@@ -1,28 +1,35 @@
-import { Component, forwardRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import EventEmitter from 'events';
+type PasswordType = 'password' | 'text';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-password',
+  templateUrl: './password.component.html',
+  styleUrls: ['./password.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => PasswordComponent),
       multi: true
     }
   ]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class PasswordComponent implements OnInit, ControlValueAccessor {
 
   @Input() placeholder: string;
   @Output() changed = new EventEmitter<string>();
+  // @Output() changed = new EventEmitter();
   value: string;
   isDisabled: boolean;
-  constructor() { }
+  passwordType: PasswordType;
+
+  constructor() {
+    this.passwordType = 'password';
+  }
 
   private propogateChange: any = () => { };
-  private propogateTouched: any = () => { };
+  private propagateTouched: any = () => { };
 
   writeValue(value: string): void {
     this.value = value;
@@ -31,12 +38,12 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.propogateChange = fn;
   }
   registerOnTouched(fn: any): void {
-    this.propogateTouched = fn;
+    console.log(fn);
+    this.propagateTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-
   onKeyup(value: string): void {
     this.value = value;
     this.propogateChange(value);
@@ -44,9 +51,13 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   }
 
   onBlur(): void {
-    this.propogateTouched();
+    this.propagateTouched();
   }
-  
+
+
+  togglePassword(): void {
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+  }
   ngOnInit(): void {
   }
 
