@@ -27,8 +27,8 @@ export class FormFieldComponent implements OnInit {
     return this.control && this.control.invalid && this.control.touched;
   }
 
-
-  get errorKey() {
+ // tslint:disable-next-line:typedef
+ get errorKey() {
     return this.control && this.control.errors && Object.keys(this.control.errors)[0];
   }
 

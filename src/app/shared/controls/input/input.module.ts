@@ -8,7 +8,7 @@ import { InputComponent } from './input.component';
   declarations: [InputComponent],
   imports: [
     CommonModule,
-    
+
   ],
   exports: [
     InputComponent

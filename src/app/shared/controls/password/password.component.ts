@@ -1,6 +1,5 @@
-import { Component, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import EventEmitter from 'events';
 type PasswordType = 'password' | 'text';
 
 @Component({
@@ -19,7 +18,7 @@ export class PasswordComponent implements OnInit, ControlValueAccessor {
 
   @Input() placeholder: string;
   @Output() changed = new EventEmitter<string>();
-  // @Output() changed = new EventEmitter();
+  
   value: string;
   isDisabled: boolean;
   passwordType: PasswordType;
@@ -38,7 +37,6 @@ export class PasswordComponent implements OnInit, ControlValueAccessor {
     this.propogateChange = fn;
   }
   registerOnTouched(fn: any): void {
-    console.log(fn);
     this.propagateTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {

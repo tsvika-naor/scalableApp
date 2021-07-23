@@ -48,6 +48,7 @@ export class SharedComponent implements OnInit {
         });
     }
 
+    // tslint:disable-next-line:typedef
     onToggleInline() {
         this.isInline = !this.isInline;
     }

@@ -1,30 +1,33 @@
 import { Component, forwardRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlItem, Value } from '@app/models/frontend';
+export { ControlItem, Value } from '@app/models/frontend';
+
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => SelectComponent),
       multi: true
     }
   ]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
-
+export class SelectComponent implements OnInit, ControlValueAccessor {
+  @Input() items: ControlItem[];
   @Input() placeholder: string;
-  @Output() changed = new EventEmitter<string>();
-  value: string;
+  @Output() changed = new EventEmitter<Value>();
+  value: Value;
   isDisabled: boolean;
-  constructor() { }
 
   private propogateChange: any = () => { };
   private propogateTouched: any = () => { };
 
-  writeValue(value: string): void {
+  constructor() { }
+  writeValue(value: Value): void {
     this.value = value;
   }
   registerOnChange(fn: any): void {
@@ -33,21 +36,13 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.propogateTouched = fn;
   }
+
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
 
-  onKeyup(value: string): void {
-    this.value = value;
-    this.propogateChange(value);
-    this.changed.emit(value);
-  }
-
-  onBlur(): void {
-    this.propogateTouched();
-  }
-
   ngOnInit(): void {
   }
+
 
 }
